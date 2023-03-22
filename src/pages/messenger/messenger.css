@@ -1,0 +1,4 @@
+.messanger{
+    height: calc(100vh - 50px);
+    display: flex;
+}

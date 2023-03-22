@@ -1,0 +1,16 @@
+.messangerRight {
+    flex: 3;
+
+}
+
+
+.greenbg {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #0bea0b;
+    top: 9px;
+    left: 28px;
+    position: absolute;
+
+}

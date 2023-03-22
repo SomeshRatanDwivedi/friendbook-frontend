@@ -1,0 +1,11 @@
+.appContainer{
+    display: flex;
+}
+
+.appLeft{
+    flex: 3;
+}
+
+.appRight{
+    flex: 9;
+}

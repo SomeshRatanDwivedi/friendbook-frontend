@@ -1,0 +1,27 @@
+.sidebarFriend {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.sidebarFriendImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.sidebarFriend:hover{
+   background-color: rgb(237, 236, 236);
+   color: black;
+}
+
+.blueBgColor{
+    background-color:#1877f2;
+    color: white;
+}

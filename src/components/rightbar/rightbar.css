@@ -1,0 +1,133 @@
+.rightbar {
+    flex: 3.5;
+}
+
+.rightbarWrapper {
+    padding: 20px 20px 0 0;
+}
+
+.birthdayContainer {
+    display: flex;
+    align-items: center;
+}
+
+.giftIcon {
+    height: 40px !important;
+    width: 40px !important;
+    margin-right: 10px;
+    color: #FB2576;
+}
+
+
+.birthdayText {
+    font-weight: 300;
+    font-size: 15px;
+}
+
+
+
+
+.rightbarTitle {
+    margin-bottom: 20px;
+}
+
+.rightbarFriendList {
+    list-style: none;
+    cursor: pointer;
+}
+
+
+
+.rightbarProfileTitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+
+}
+
+.rightbarInfo {
+    margin-bottom: 30px;
+}
+
+.rightbarInfoItem {
+    margin-bottom: 10px;
+}
+
+.rightbarInfoKey {
+    font-weight: 500;
+    margin-right: 15px;
+    color: #555;
+}
+
+.rightbarInfoValue {
+    font-weight: 300;
+}
+
+.rightbarFollowings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+
+
+
+.follow {
+    border: 0;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    font-weight: 500;
+    background-color: #1877f2;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+
+}
+
+.infoInput {
+    height: 28px;
+    width: 230px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 5px;
+}
+
+.infoInput:focus {
+    outline: none;
+}
+
+.homeTown-ml {
+    margin-left: 60px;
+}
+
+.city-ml {
+    margin-left: 52px;
+}
+
+.name-ml {
+    margin-left: 45px;
+}
+
+.desc-ml {
+    margin-left: 51px;
+}
+
+.chooseProfilePic {
+    border: 0;
+    margin-left: 38px;
+}
+
+.rightbarInfoProfilePic{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.rightbarProfilePicEditParent{
+    display: flex;
+    align-items: center;
+}
