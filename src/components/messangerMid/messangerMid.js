@@ -19,7 +19,7 @@ const MessangerMid = ({ conversationId, recieverId, setOnlineUsers}) => {
     const auth=useAuth();
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8900");
+        socket.current = io("https://friendbook-socket.onrender.com");
 
         socket.current.on('getMessage', (data) => {
             setNewMessage({
