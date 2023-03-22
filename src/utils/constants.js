@@ -1,5 +1,5 @@
 const developmenApiUrl='http://localhost:8000/api/v1';
-const productionApiUrl ='http://ec2-13-232-73-252.ap-south-1.compute.amazonaws.com:8000/api/v1'
+const productionApiUrl ='https://friendbook-backend.onrender.com/api/v1'
 const API_ROOT = productionApiUrl;
 
 
