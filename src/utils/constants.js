@@ -9,6 +9,7 @@ export const API_URLS = {
     signup: () => `${API_ROOT}/users/signup`,
     posts: (page, limit) => `${API_ROOT}/posts?page=${page}&limit=${limit}`,
     createPost: () => `${API_ROOT}/posts/create`,
+    deletePost: (id) => `${API_ROOT}/posts/delete_post?post_id=${id}`,
     createFriendship: (userId) => `${API_ROOT}/friendship/create_friendship?user_id=${userId}`,
     friends: () => `${API_ROOT}/friendship/fetch_user_friends`,
     removeFriend: (userId) => `${API_ROOT}/friendship/remove_friendship?user_id=${userId}`,
@@ -28,7 +29,8 @@ export const API_URLS = {
     getAllParticipants: (id) => `${API_ROOT}/conversation/participants?conversationId=${id}`,
     createNotification:(id, type)=>`${API_ROOT}/notifications/create_notification?userId=${id}&notification_type=${type}`,
     getNotifications: () => `${API_ROOT}/notifications/get_notifications`,
-    getNumberOfNotifications: () => `${API_ROOT}/notifications/no_of_notifications`
+    getNumberOfNotifications: () => `${API_ROOT}/notifications/no_of_notifications`,
+  
 
 };
 
@@ -61,5 +63,9 @@ export const removeItemFromLocalStorage = (key) => {
 export const LOCALSTORAGE_TOKEN_KEY = '__friend_book_token__';
 
 
-export const backend_url ='http://localhost:8000/'
 
+
+const developmentStaticUrl = 'http://localhost:8000/';
+const productionStaticUrl ='https://friendbook-backend.onrender.com';
+
+export const backend_url = productionStaticUrl;

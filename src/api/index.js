@@ -70,6 +70,32 @@ export const signup =async (name, email, password, confirmPassword) => {
     }
 }
 
+
+export const createPost = async (formData) => {
+    const config = makeConfig(true);
+    try {
+        const response = await axios.post(
+            API_URLS.createPost(),
+            formData,
+            config);
+        const data = response.data;
+        if (data.success) {
+            return {
+                data: data.data,
+                success: true
+            }
+        }
+        throw new Error(data.message)
+
+    } catch (error) {
+        return {
+            message: error.message,
+            success: false
+        }
+    }
+
+}
+
 export const getPosts =async (page = 1, limit = 100) => {
     const config = makeConfig();
     try {
@@ -91,6 +117,31 @@ export const getPosts =async (page = 1, limit = 100) => {
             success: false
         }
     }
+}
+
+export const deletePost = async (id) => {
+    console.log("***")
+    const config = makeConfig();
+    try {
+        const response = await axios.delete(
+            API_URLS.deletePost(id),
+            config);
+        const data = response.data;
+        if (data.success) {
+            return {
+                data: data.data,
+                success: true
+            }
+        }
+        throw new Error(data.message)
+
+    } catch (error) {
+        return {
+            message: error.message,
+            success: false
+        }
+    }
+
 }
 
 export const editProfile = async(body) => {
@@ -308,31 +359,6 @@ export const deleteComment = async(commentId, postId) => {
             success: false
         }
     }
-}
-
-export const createPost = async(formData) => {
-    const config = makeConfig(true);
-    try {
-        const response = await axios.post(
-            API_URLS.createPost(),
-            formData,
-            config);
-        const data = response.data;
-        if (data.success) {
-            return {
-                data: data.data,
-                success: true
-            }
-        }
-        throw new Error(data.message)
-
-    } catch (error) {
-        return {
-            message: error.message,
-            success: false
-        }
-    }
-
 }
 
 export const getAllUser = async(searchKey) => {
