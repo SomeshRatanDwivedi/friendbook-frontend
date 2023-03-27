@@ -37,7 +37,7 @@ const Feed = () => {
                 {
                     isLoading ?<Loading />:
                     posts.map(post => {
-                        return <Post key={`post-${post._id}`} post={post} setPosts={setPosts} />
+                        return <Post key={`post-${post._id}`} post={post}/>
                     })
                 }
 

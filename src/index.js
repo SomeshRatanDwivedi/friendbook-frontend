@@ -11,6 +11,7 @@ import TimeAgo from 'javascript-time-ago'
 
 import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
+import { SocketProvider } from './providers/SocketProvider';
 
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
@@ -18,12 +19,13 @@ TimeAgo.addLocale(ru)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <AuthProvider>
-      
-        <App />
-      <ToastContainer />
-      
-    </AuthProvider>
+  <AuthProvider>
+    <SocketProvider>
+      <App />
+    </SocketProvider>
+    <ToastContainer />
+
+  </AuthProvider>
 );
 
 

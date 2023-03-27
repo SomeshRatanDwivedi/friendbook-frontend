@@ -9,7 +9,7 @@ const Message = ({ right, message, participants, secondUserId }) => {
     const findImagePathOfSecondUser=()=>{
         if (secondUserId == participants[0]?._id){
             if (participants[0]?.avtar){
-                return backend_url + participants[0]?.avtar
+                return  participants[0]?.avtar
             }
             else{
                 return '/assets/avtar-4.png'
@@ -17,7 +17,7 @@ const Message = ({ right, message, participants, secondUserId }) => {
         }
         else{
             if (participants[1]?.avtar) {
-                return backend_url + participants[1]?.avtar
+                return  participants[1]?.avtar
             }
             else {
                 return '/assets/avtar-4.png'
@@ -30,7 +30,7 @@ const Message = ({ right, message, participants, secondUserId }) => {
             <div className={right ? 'messageBody justifyContentEnd' : 'messageBody'}>
                 {
                     right ?
-                        <img className='messageProfile' src={auth.user?.avtar ? backend_url + auth.user?.avtar:'/assets/avtar-4.png'} /> :
+                        <img className='messageProfile' src={auth.user?.avtar ?  auth.user?.avtar:'/assets/avtar-4.png'} /> :
                         <img className='messageProfile' src={findImagePathOfSecondUser()} 
 
                             />

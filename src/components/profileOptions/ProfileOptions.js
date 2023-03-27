@@ -16,7 +16,7 @@ const ProfileOptions = ({setIsProfileClicked, destroySession}) => {
         <div ref={wrapperRef} className='profileAndLogoutParent'>
             <div className='topbarProfileLink' onClick={() => setIsProfileClicked(false)} >
                 <Link to={`/profile/${auth.user._id}`}>
-                    <img src={auth.user.avtar ? backend_url + auth.user.avtar : '/assets/avtar-4.png'} alt='' className='profileLinkImg' />
+                    <img src={auth.user.avtar ?  auth.user.avtar : '/assets/avtar-4.png'} alt='' className='profileLinkImg' />
                     <span>{auth.user.name}</span>
                 </Link>
             </div>

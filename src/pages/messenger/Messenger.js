@@ -42,7 +42,6 @@ const Messenger = () => {
     const createNewConversation=async(id)=>{
 
            const response=await makeNewConversation(id);
-           console.log(response)
            if(response.success){
               setConversations([...conversations, response.data.conversation]);
               setConversationId(response.data.conversation._id);

@@ -6,7 +6,7 @@ const Friends = ({blueBgColor,user}) => {
    
     return (
         <li  className={blueBgColor ? 'sidebarFriend blueBgColor' :'sidebarFriend'}>
-            <img src={user.avtar ? backend_url + user.avtar :'../../assets/avtar-4.png'} className='sidebarFriendImg' />
+            <img src={user.avtar ?  user.avtar :'../../assets/avtar-4.png'} className='sidebarFriendImg' />
             <span className='sidebarFriendName'>{user.name}</span>
 
         </li>

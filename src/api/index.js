@@ -1,8 +1,11 @@
 import axios from 'axios'
-import { API_URLS,LOCALSTORAGE_TOKEN_KEY } from '../utils/constants'
+import { API_URLS } from '../utils/constants';
+import { config } from '../utils/config';
+
+const localStorageKey = config.local_storage_token_key
 
 const makeConfig=(isMultiPart)=>{
-    const token=window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
+    const token = window.localStorage.getItem(localStorageKey);
     
     const headers={
         'Content-Type': isMultiPart ?'multipart/form-data': 'application/x-www-form-urlencoded',
@@ -120,7 +123,6 @@ export const getPosts =async (page = 1, limit = 100) => {
 }
 
 export const deletePost = async (id) => {
-    console.log("***")
     const config = makeConfig();
     try {
         const response = await axios.delete(
@@ -528,12 +530,12 @@ export const getNotifications = async () => {
     }
 }
 
-export const createNotification = async (userId, type) => {
+export const createNotification = async (userId, type, isUserLike=false) => {
     const config = makeConfig();
 
     try {
         const response = await axios.post(
-            API_URLS.createNotification(userId, type),
+            API_URLS.createNotification(userId, type, isUserLike),
             {},
             config);
         const data = response.data;
@@ -559,6 +561,56 @@ export const getNumberOfNotifications = async () => {
     try {
         const response = await axios.get(
             API_URLS.getNumberOfNotifications(),
+            config);
+        const data = response.data;
+        if (data.success) {
+            return {
+                data: data.data,
+                success: true
+            }
+        }
+        throw new Error(data.message)
+
+    } catch (error) {
+        return {
+            message: error.message,
+            success: false
+        }
+    }
+}
+
+export const newNotification = async (userId, isIncrease, isShown = false) => {
+   
+    const config = makeConfig();
+    try {
+        const response = await axios.post(
+            API_URLS.createNewNotification(userId, isIncrease, isShown), 
+            {},
+            config);
+        const data = response.data;
+        if (data.success) {
+            return {
+                data: data.data,
+                success: true
+            }
+        }
+        throw new Error(data.message)
+
+    } catch (error) {
+        return {
+            message: error.message,
+            success: false
+        }
+    }
+}
+
+export const newMessage = async (userId, messages) => {
+
+    const config = makeConfig();
+    try {
+        const response = await axios.post(
+            API_URLS.createNewNotification(userId),
+            { messages },
             config);
         const data = response.data;
         if (data.success) {

@@ -10,6 +10,7 @@ import ProfileOptions from '../profileOptions/ProfileOptions';
 import Notifications from '../notifications/Notifications';
 import './topbar.css'
 import { toast } from 'react-toastify';
+import { useSocket } from '../../providers/SocketProvider';
 
 const Topbar = () => {
     const [isProfileClicked, setIsProfileClicked] = useState(false);
@@ -17,21 +18,36 @@ const Topbar = () => {
     const [users, setUsers] = useState('');
     const [isNotificationClicked, setIsNotificationClicked] = useState(false);
     const [numberOfNotifications, setNumberOfNotifications] = useState(0);
+    const [numberOfmessages, setNumberOfMessages]=useState(0)
     const navigate = useNavigate();
     const auth = useAuth();
+    const socket=useSocket();
 
     useEffect(() => {
-      const get_number_of_Notifications=async()=>{
-        const response=await getNumberOfNotifications();
-        if(response){
-            setNumberOfNotifications(response.data.no_of_notifications);
+        const get_number_of_Notifications = async () => {
+            const response = await getNumberOfNotifications();
+            if (response) {
+                setNumberOfNotifications(response.data.no_of_notifications);
+            }
+            else {
+                toast.error(response.message)
+            }
         }
-        else{
-            toast.error(response.message)
-        }
-      }
-      get_number_of_Notifications();
+        get_number_of_Notifications();
     }, [])
+
+    useEffect(() => {
+
+        socket.on('getMessage', (data) => {
+            setNumberOfMessages(numberOfmessages+1)
+        })
+    }, [numberOfmessages])
+
+    useEffect(() => {
+        socket.on('getNotifications', (data) => {
+            setNumberOfNotifications(numberOfNotifications+1);
+        })
+    }, [numberOfNotifications])
 
     useEffect(() => {
         const allUsers = async () => {
@@ -51,7 +67,13 @@ const Topbar = () => {
 
     const destroySession = () => {
         auth.logout();
-        navigate('/login')
+        navigate('/login');
+        socket.disconnect();
+    }
+
+    const handleSearchUserClick=()=>{
+        setSearchKey('') 
+        setUsers([]);
     }
 
     return (
@@ -71,7 +93,7 @@ const Topbar = () => {
                             {
                                 users.map(user => {
                                     return (
-                                        <Link className='searchUserLink' to={`/profile/${user._id}`} key={`friend- ${user._id}`} onClick={() => setSearchKey('')}>
+                                        <Link className='searchUserLink' to={`/profile/${user._id}`} key={`friend- ${user._id}`} onClick={handleSearchUserClick}>
                                             <Friends user={user} />
                                         </Link>
                                     )
@@ -100,8 +122,12 @@ const Topbar = () => {
                     </div>
                     <div className='topbarIconItem'>
                         <Link to={`/messanger/${auth.user._id}`} className='chatLink'>
-                            <Chat />
-                            <span className='topbarIconBadge'>2</span>
+                            <Chat onClick={()=>setNumberOfMessages(0)} />
+                            {
+                                numberOfmessages !== 0 &&
+                                <span className='topbarIconBadge'>{numberOfmessages <= 9 ? numberOfmessages : '9+'}</span>
+                            }
+                            
                         </Link>
 
 
@@ -114,14 +140,15 @@ const Topbar = () => {
                         }
                         
                         {
-                            isNotificationClicked && <Notifications setIsNotificationClicked={setIsNotificationClicked} />
+                            isNotificationClicked && <Notifications setIsNotificationClicked={setIsNotificationClicked}
+                                setNumberOfNotifications={setNumberOfNotifications} />
                         }
 
                     </div>
 
                 </div>
                 <div className='topbarAvtarParent'>
-                    <img src={auth.user.avtar ? backend_url + auth.user.avtar : '/assets/avtar-4.png'} alt='' className='topbarImg' onClick={() => setIsProfileClicked(!isProfileClicked)} />
+                    <img src={auth.user.avtar ?  auth.user.avtar : '/assets/avtar-4.png'} alt='' className='topbarImg' onClick={() => setIsProfileClicked(!isProfileClicked)} />
                     {
                         isProfileClicked && <ProfileOptions setIsProfileClicked={setIsProfileClicked} destroySession={destroySession} />
 

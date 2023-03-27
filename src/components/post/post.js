@@ -1,13 +1,14 @@
 import { MoreVert } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './post.css'
 import ReactTimeAgo from 'react-time-ago'
-import { createComment, createNotification, toggleLike, deletePost as delete_post } from '../../api';
+import { createComment, createNotification, toggleLike, deletePost as delete_post, newNotification, getNumberOfNotifications } from '../../api';
 import { toast } from 'react-toastify';
 import Comment from '../comments/Comment';
 import { backend_url } from '../../utils/constants';
 import { useAuth } from '../../hooks/authHook';
 import { Link } from 'react-router-dom';
+import { useSocket } from '../../providers/SocketProvider';
 
 
 
@@ -19,22 +20,30 @@ const Post = ({ post, setPosts }) => {
     const [commentContent, setCommentContent] = useState('');
     const [isShowComment, setIsShowComment] = useState(false);
     const [isDeleteButtonShow, setIsDeleteButtonShow] = useState(false);
-    const [isDeletingPost, setIsDeletingPost] = useState(false)
+    const [isDeletingPost, setIsDeletingPost] = useState(false);
+
     const auth = useAuth();
+    const socket=useSocket();
+
+    const createNewNotificationSocket=()=>{
+        socket.emit('newNotification',{
+            recieverId:post.user._id,
+        });
+       
+    }
 
 
 
 
     const handleClick = async () => {
         const response = await toggleLike(post._id, 'Post');
-        await createNotification(post.user._id, 'Like');
+        await createNotification(post.user._id, 'Like', !isUserLike);
+        await newNotification(post.user._id, true)
+        createNewNotificationSocket();
         if (response.success) {
             setNumberOfLikes(isUserLike ? numberOfLikes - 1 : numberOfLikes + 1);
             toast.success(isUserLike ? "You disliked post" : 'You liked the post');
             setIsUserLike(!isUserLike);
-
-
-
         }
         else {
             toast.error(response.message)
@@ -47,6 +56,7 @@ const Post = ({ post, setPosts }) => {
     const handleCommentInput = async (e) => {
         if (e.key == 'Enter') {
             e.target.value = '';
+            createNewNotificationSocket()
             const response = await createComment(post._id, commentContent);
             await createNotification(post.user._id, 'Comment');
             if (response.success) {
@@ -91,7 +101,7 @@ const Post = ({ post, setPosts }) => {
                         <div className='postTopLeft'>
                             <Link className='postUserProfileLink' to={`/profile/${post.user._id}`}>
 
-                                <img className='postProfileImg' src={post.user?.avtar ? backend_url + post.user.avtar : '../../assets/avtar-4.png'} />
+                                <img className='postProfileImg' src={post.user?.avtar ?  post.user.avtar : '../../assets/avtar-4.png'} />
                                 <span className='postUserName'>{post.user.name}</span>
                             </Link>
                             <span className='postDate'>{<ReactTimeAgo date={new Date(post.createdAt)} locale="en-US" />}</span>
@@ -150,7 +160,7 @@ const Post = ({ post, setPosts }) => {
 
                         <div className='commentInput'>
 
-                            <img className='commentProfile' src={auth.user.avtar ? backend_url + auth.user.avtar : '../../assets/avtar-4.png'} />
+                            <img className='commentProfile' src={auth.user.avtar ?  auth.user.avtar : '../../assets/avtar-4.png'} />
                             <input placeholder='Write a comment' className='commentInputBox' onKeyUp={handleCommentInput} />
                         </div>
 

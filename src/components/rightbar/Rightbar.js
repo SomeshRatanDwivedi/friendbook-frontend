@@ -10,8 +10,30 @@ import { toast } from 'react-toastify';
 import { backend_url } from '../../utils/constants';
 import { Link } from 'react-router-dom';
 import OnlineFriends from '../onlineFriends/OnlineFriends';
+import { useSocket } from '../../providers/SocketProvider';
 
 const Rightbar = ({ profile, user, id, editUser }) => {
+    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [onlineFriends, setOnlineFriends]=useState([]);
+    const socket=useSocket();
+    const auth=useAuth();
+
+    useEffect(() => {
+      
+        socket.emit("addUser", auth.user?._id);
+        socket.on("getUsers", users => {
+            setOnlineUsers(users)
+        })
+
+
+    }, [auth.user]);
+
+
+    useEffect(() => {
+        const newOnlineFriends = user?.friends.filter(f => onlineUsers.includes(f._id));
+        setOnlineFriends(newOnlineFriends)
+    }, [onlineUsers])
+
     const HomeRightbar = () => {
         return (
             <>
@@ -25,9 +47,9 @@ const Rightbar = ({ profile, user, id, editUser }) => {
                 <h4 className='rightbarTitle'>Online Friends</h4>
                 <ul className='rightbarFriendList'>
                     {
-                        user?.friends.map(user => {
+                        onlineFriends.map(user => {
                             return <Link key={user._id} className='onlineFriendLink' to={`/profile/${user?._id}`}>
-                                <OnlineFriends  onlineFriend={user} />
+                                <OnlineFriends onlineFriend={user} />
                             </Link>
 
 
@@ -197,7 +219,7 @@ const Rightbar = ({ profile, user, id, editUser }) => {
                         <span className='rightbarInfoKey'>Profile:</span>
                         {
                             isEditModeOn ? <input className='infoInput chooseProfilePic' type='file' onChange={(e) => setAvtar(e.target.files[0])} /> :
-                                <img src={user.avtar ? backend_url + user.avtar : '../../assets/avtar-4.png'} className='rightbarInfoProfilePic' />
+                                <img src={user.avtar ?  user.avtar : '../../assets/avtar-4.png'} className='rightbarInfoProfilePic' />
 
                         }
 

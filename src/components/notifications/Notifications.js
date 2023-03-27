@@ -2,15 +2,30 @@ import { MoreVert } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactTimeAgo from 'react-time-ago';
 import { toast } from 'react-toastify';
-import { getNotifications } from '../../api';
+import { getNotifications, newNotification } from '../../api';
+import { useAuth } from '../../hooks/authHook';
 import useOutsideAlerter from '../../hooks/outsideAlerterHook';
 import { backend_url } from '../../utils/constants';
 import Loading from '../loading/Loading';
 import './notifications.css'
 
-const Notifications = ({ setIsNotificationClicked }) => {
+const Notifications = ({ setIsNotificationClicked, setNumberOfNotifications }) => {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading]=useState(true);
+    const auth=useAuth();
+
+    useEffect(() => {
+        const get_number_of_Notifications = async () => {
+            const response = await newNotification(auth.user._id, false, true);
+            if (response) {
+                setNumberOfNotifications(0);
+            }
+            else {
+                toast.error(response.message)
+            }
+        }
+        get_number_of_Notifications();
+    }, [])
 
     useEffect(() => {
         const get_notifications = async () => {
@@ -44,7 +59,7 @@ const Notifications = ({ setIsNotificationClicked }) => {
                     notifications.map(notification => {
                         return <li className={notification.isShown ? 'notificationList' :'notificationList shownNotificatioBgColor'} key={notification._id}>
                             <div>
-                                <img src={notification.sender.avtar ? backend_url + notification.sender.avtar : '/assets/avtar-4.png'} className='notificationAvtar' />
+                                <img src={notification.sender.avtar ?  notification.sender.avtar : '/assets/avtar-4.png'} className='notificationAvtar' />
                             </div>
                            
                             <section>

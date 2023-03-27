@@ -1,6 +1,5 @@
-const developmenApiUrl='http://localhost:8000/api/v1';
-const productionApiUrl ='https://friendbook-backend.onrender.com/api/v1'
-const API_ROOT = productionApiUrl;
+import { config } from "./config";
+const API_ROOT = config.api_url;
 
 
 
@@ -27,11 +26,11 @@ export const API_URLS = {
     sendMessage: (recieverId, conversationId) => `${API_ROOT}/message/create_new_message?recieverId=${recieverId}&conversationId=${conversationId}`,
     makeNewConversation: (id) => `${API_ROOT}/conversation/new_conversation?recieverId=${id}`,
     getAllParticipants: (id) => `${API_ROOT}/conversation/participants?conversationId=${id}`,
-    createNotification:(id, type)=>`${API_ROOT}/notifications/create_notification?userId=${id}&notification_type=${type}`,
+    createNotification:(id, type, isUserLike)=>`${API_ROOT}/notifications/create_notification?userId=${id}&notification_type=${type}&isUserLike=${isUserLike}`,
     getNotifications: () => `${API_ROOT}/notifications/get_notifications`,
     getNumberOfNotifications: () => `${API_ROOT}/notifications/no_of_notifications`,
-  
-
+    createNewNotification: (id, isIncrease, isShown) => `${API_ROOT}/users/new_notifications?userId=${id}&isIncrease=${isIncrease}&isShown=${isShown}`,
+    createNewMessage: (id) => `${API_ROOT}/users/new_messages?userId=${id}`,
 };
 
 
@@ -60,12 +59,4 @@ export const removeItemFromLocalStorage = (key) => {
 }
 
 
-export const LOCALSTORAGE_TOKEN_KEY = '__friend_book_token__';
-
-
-
-
-const developmentStaticUrl = 'http://localhost:8000/';
-const productionStaticUrl ='https://friendbook-backend.onrender.com';
-
-export const backend_url = productionStaticUrl;
+export const backend_url = config.static_url;

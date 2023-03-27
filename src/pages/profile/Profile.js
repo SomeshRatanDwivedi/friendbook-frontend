@@ -55,7 +55,7 @@ const Profile = () => {
                     <div className='profileRightTop'>
                         <div className='profileCover'>
                             <img className='profileCoverImg' src='../../assets/cover-img.jpeg' />
-                            <img className='profileUserImg' src={user.avtar?backend_url + user.avtar:'../../assets/avtar-4.png'} />
+                            <img className='profileUserImg' src={user.avtar? user.avtar:'../../assets/avtar-4.png'} />
 
                         </div>
                         <div className='profileInfo'>

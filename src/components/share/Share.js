@@ -40,7 +40,7 @@ const Share = ({setPosts}) => {
         <div className='share'>
             <div className='shareWrapper'>
                 <div className='shareTop'>
-                    <img className='shareProfileImg' src={auth.user.avtar ? backend_url + auth.user.avtar : '../../assets/avtar-4.png'} />
+                    <img className='shareProfileImg' src={auth.user.avtar ?  auth.user.avtar : '../../assets/avtar-4.png'} />
                     <input
                         placeholder={`What's in your mind ${auth.user.name.split(' ')[0]}`}
                         className='shareInput' value={postContent} onChange={(e) => setPostContent(e.target.value)}
