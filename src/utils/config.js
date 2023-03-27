@@ -12,4 +12,4 @@ const production = {
     static_url: process.env.REACT_APP_PRODUCTION_STATIC_URL,
 }
 
-export const config= development;
+export const config= production;
