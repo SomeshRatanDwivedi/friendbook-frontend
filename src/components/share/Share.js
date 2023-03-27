@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { createPost } from '../../api';
 import { useAuth } from '../../hooks/authHook';
-import { backend_url } from '../../utils/constants';
+
 import './share.css'
 
 const Share = ({setPosts}) => {

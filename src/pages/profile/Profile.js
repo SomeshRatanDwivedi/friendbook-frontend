@@ -7,7 +7,7 @@ import Leftbar from '../../components/leftbar/Leftbar';
 import Loading from '../../components/loading/Loading';
 import Rightbar from '../../components/rightbar/Rightbar';
 import { useAuth } from '../../hooks/authHook';
-import { backend_url } from '../../utils/constants';
+
 
 
 import './profile.css'

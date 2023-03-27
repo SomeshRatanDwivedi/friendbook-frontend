@@ -1,7 +1,10 @@
 import { createContext, useContext } from 'react';
 import { io } from 'socket.io-client'
+import { config } from '../utils/config';
 
-const socket = io("http://localhost:8900");
+const socketUrl=config.socket_url
+
+const socket = io(socketUrl);
 
 const SocketContext=createContext(socket);
 

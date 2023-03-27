@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAllUser, getNumberOfNotifications } from '../../api';
 import { useAuth } from '../../hooks/authHook';
-import { backend_url } from '../../utils/constants';
+
 import Friends from '../friends/Friends';
 import ProfileOptions from '../profileOptions/ProfileOptions';
 import Notifications from '../notifications/Notifications';

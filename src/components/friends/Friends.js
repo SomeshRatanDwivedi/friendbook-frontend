@@ -1,5 +1,5 @@
 import React from 'react';
-import { backend_url } from '../../utils/constants';
+
 import './friends.css'
 
 const Friends = ({blueBgColor,user}) => {

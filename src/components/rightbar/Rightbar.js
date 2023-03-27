@@ -7,7 +7,7 @@ import UserFriends from '../userFriends/UserFriends';
 import { useAuth } from '../../hooks/authHook';
 import { addFriend, editProfile, removeFriendShip } from '../../api';
 import { toast } from 'react-toastify';
-import { backend_url } from '../../utils/constants';
+
 import { Link } from 'react-router-dom';
 import OnlineFriends from '../onlineFriends/OnlineFriends';
 import { useSocket } from '../../providers/SocketProvider';

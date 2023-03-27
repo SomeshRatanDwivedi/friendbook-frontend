@@ -4,7 +4,7 @@ import './profileOptions.css'
 import { Settings, Logout, Feedback, DisplaySettings, QuestionMark} from '@mui/icons-material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth } from '../../hooks/authHook';
-import { backend_url } from '../../utils/constants';
+
 import { Link } from 'react-router-dom';
 import useOutsideAlerter from '../../hooks/outsideAlerterHook';
 

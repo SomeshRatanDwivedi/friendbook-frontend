@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './message.css'
 import ReactTimeAgo from 'react-time-ago'
-import { backend_url } from '../../utils/constants';
+
 import { useAuth } from '../../hooks/authHook';
 
 const Message = ({ right, message, participants, secondUserId }) => {

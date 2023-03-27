@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { backend_url } from '../../utils/constants';
+
 import './onlinefriends.css'
 
 const OnlineFriends = ({onlineFriend}) => {
@@ -8,7 +8,7 @@ const OnlineFriends = ({onlineFriend}) => {
         <li className='rightBarFriend'>
           
             <div className='rightbarProfileImgContainer'>
-                <img className='rightbarProfileImg' src={onlineFriend?.avtar?backend_url+onlineFriend.avtar:'/assets/avtar-4.png'} />
+                <img className='rightbarProfileImg' src={onlineFriend?.avtar?onlineFriend.avtar:'/assets/avtar-4.png'} />
                 <span className='rightbarOnline'></span>
             </div>
             <span className='rightbarUserName'>{onlineFriend?.name}</span>

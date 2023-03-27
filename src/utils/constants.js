@@ -59,4 +59,3 @@ export const removeItemFromLocalStorage = (key) => {
 }
 
 
-export const backend_url = config.static_url;

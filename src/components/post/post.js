@@ -5,7 +5,7 @@ import ReactTimeAgo from 'react-time-ago'
 import { createComment, createNotification, toggleLike, deletePost as delete_post, newNotification, getNumberOfNotifications } from '../../api';
 import { toast } from 'react-toastify';
 import Comment from '../comments/Comment';
-import { backend_url } from '../../utils/constants';
+
 import { useAuth } from '../../hooks/authHook';
 import { Link } from 'react-router-dom';
 import { useSocket } from '../../providers/SocketProvider';

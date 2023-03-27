@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { getNotifications, newNotification } from '../../api';
 import { useAuth } from '../../hooks/authHook';
 import useOutsideAlerter from '../../hooks/outsideAlerterHook';
-import { backend_url } from '../../utils/constants';
+
 import Loading from '../loading/Loading';
 import './notifications.css'
 

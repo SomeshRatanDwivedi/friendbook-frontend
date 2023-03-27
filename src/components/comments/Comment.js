@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../hooks/authHook';
-import { backend_url } from '../../utils/constants';
+
 import './comment.css'
 
 const Comment = ({comment}) => {
